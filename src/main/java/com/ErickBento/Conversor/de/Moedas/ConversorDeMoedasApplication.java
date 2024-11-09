@@ -1,5 +1,6 @@
 package com.ErickBento.Conversor.de.Moedas;
 
+import com.ErickBento.Conversor.de.Moedas.conversor.ConversorDeMoedasUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,6 +12,7 @@ public class ConversorDeMoedasApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConversorDeMoedasApplication.class, args);
 		Scanner scanner = new Scanner(System.in);
+
 		int option;
 
 		do {
@@ -25,42 +27,44 @@ public class ConversorDeMoedasApplication {
 			System.out.print("Escolha uma opção válida: ");
 			option = scanner.nextInt();
 
-			switch (option) {
-				case 1:
-					System.out.println("Convertendo Dólar para Peso Argentino...");
-					// Adicione lógica de conversão aqui
-					break;
-				case 2:
-					System.out.println("Convertendo Peso Argentino para Dólar...");
-					// Adicione lógica de conversão aqui
-					break;
-				case 3:
-					System.out.println("Convertendo Dólar para Real Brasileiro...");
-					// Adicione lógica de conversão aqui
-					break;
-				case 4:
-					System.out.println("Convertendo Real Brasileiro para Dólar...");
-					// Adicione lógica de conversão aqui
-					break;
-				case 5:
-					System.out.println("Convertendo Dólar para Peso Colombiano...");
-					// Adicione lógica de conversão aqui
-					break;
-				case 6:
-					System.out.println("Convertendo Peso Colombiano para Dólar...");
-					// Adicione lógica de conversão aqui
-					break;
-				case 7:
-					System.out.println("Saindo...");
-					break;
-				default:
-					System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
-					break;
+			if (option >= 1 && option <= 6) {
+				System.out.print("Digite o valor a ser convertido: ");
+				double valor = scanner.nextDouble();
+				switch (option) {
+					case 1:
+						System.out.println("Convertendo Dólar para Peso Argentino...");
+						ConversorDeMoedasUtil.converterMoeda("USD", "ARS", valor);
+						break;
+					case 2:
+						System.out.println("Convertendo Peso Argentino para Dólar...");
+						ConversorDeMoedasUtil.converterMoeda("ARS", "USD", valor);
+						break;
+					case 3:
+						System.out.println("Convertendo Dólar para Real Brasileiro...");
+						ConversorDeMoedasUtil.converterMoeda("USD", "BRL", valor);
+						break;
+					case 4:
+						System.out.println("Convertendo Real Brasileiro para Dólar...");
+						ConversorDeMoedasUtil.converterMoeda("BRL", "USD", valor);
+						break;
+					case 5:
+						System.out.println("Convertendo Dólar para Peso Colombiano...");
+						ConversorDeMoedasUtil.converterMoeda("USD", "COP", valor);
+						break;
+					case 6:
+						System.out.println("Convertendo Peso Colombiano para Dólar...");
+						ConversorDeMoedasUtil.converterMoeda("COP", "USD", valor);
+						break;
+				}
+			} else if (option == 7) {
+				System.out.println("Saindo...");
+			} else {
+				System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
 			}
 		} while (option != 7);
 
 		scanner.close();
 	}
-	}
+}
 
 
